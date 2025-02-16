@@ -1,9 +1,8 @@
 FROM nginx:latest
 
-LABEL maintainer="marcospereira.mpj@gmail.com"
-
-COPY gateway.conf /etc/nginx/conf.d
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80 443
+EXPOSE 8001 8002 8000
 ENTRYPOINT ["nginx"]
 CMD ["-g", "daemon off;"]

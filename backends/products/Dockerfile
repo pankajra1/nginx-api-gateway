@@ -1,5 +1,4 @@
 FROM python:3.8
-LABEL maintainer="elijahobara357gmail@gmail.com"
 
 WORKDIR /app
 

@@ -1,46 +1,35 @@
-version: '3'
+version: '3.8'
+
 services:
   nginx:
     build:
-      dockerfile: Dockerfile
       context: .
-    image: nginx
-    container_name: api-gateway-nginx
+      dockerfile: Dockerfile
+    container_name: nginx
     ports:
-      - "80:80"
+      - "8000:80"
     networks:
-      - network-bridge
+      - nginx-network
     depends_on:
-      - "products_api"
-      - "users_api"
+      - products_api
+      - users_api
 
   products_api:
-    image: products_api
-    container_name: container_products_api
+    container_name: products_api
     build:
-      dockerfile: ./Dockerfile
       context: ./backends/products/
+      dockerfile: Dockerfile
     networks:
-      - network-bridge
+      - nginx-network
 
   users_api:
-    image: users_api
-    container_name: container_users_api
+    container_name: users_api
     build:
-      dockerfile: ./Dockerfile
       context: ./backends/users/
+      dockerfile: Dockerfile
     networks:
-      - network-bridge
+      - nginx-network
 
-  users_api_balance:
-    image: users_api
-    container_name: container_users_api_balance
-    build:
-      dockerfile: ./Dockerfile
-      context: ./backends/users/
-    networks:
-      - network-bridge
-      
 networks:
-    network-bridge:
-        driver: bridge
+  nginx-network:
+    driver: bridge
