@@ -30,6 +30,14 @@ services:
     networks:
       - nginx-network
 
+  sales_api:
+    container_name: sales_api
+    build:
+      context: ./backends/sales/
+      dockerfile: Dockerfile
+    networks:
+      - nginx-network
+
 networks:
   nginx-network:
     driver: bridge
